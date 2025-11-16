@@ -1,3 +1,5 @@
+
+
 export interface Product {
   id: number;
   name: string;
@@ -5,4 +7,15 @@ export interface Product {
   price: string;
   image: string;
   category: string;
+}
+
+export interface CartItem extends Product {
+  quantity: number;
+}
+
+export interface Review {
+  id: string;
+  rating: number; // 1-5 stars
+  comment: string;
+  timestamp: number;
 }

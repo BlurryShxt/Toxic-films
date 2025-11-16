@@ -7,14 +7,14 @@ interface WishlistModalProps {
   onClose: () => void;
   wishlistItems: Product[];
   onRemoveFromWishlist: (product: Product) => void;
-  onAddToCart: () => void;
+  onAddToCart: (product: Product, quantity: number) => void; 
 }
 
 const WishlistModal: React.FC<WishlistModalProps> = ({ isOpen, onClose, wishlistItems, onRemoveFromWishlist, onAddToCart }) => {
   if (!isOpen) return null;
 
   const handleItemAddToCart = (item: Product) => {
-    onAddToCart();
+    onAddToCart(item, 1); // Pass quantity 1 when adding from wishlist
   };
 
   return (

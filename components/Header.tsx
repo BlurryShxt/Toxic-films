@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import GlitchText from './GlitchText';
 
@@ -5,9 +7,10 @@ interface HeaderProps {
   cartCount: number;
   wishlistCount: number;
   onWishlistClick: () => void;
+  onCartClick: () => void; 
 }
 
-const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, onWishlistClick }) => {
+const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, onWishlistClick, onCartClick }) => {
   return (
     <header className="fixed top-0 left-0 w-full bg-[#0a0a0a] bg-opacity-80 backdrop-blur-sm p-4 z-50 border-b border-[rgba(0,255,65,0.2)]">
       <div className="container mx-auto flex justify-between items-center">
@@ -21,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ cartCount, wishlistCount, onWishlistCli
           <a href="#" onClick={(e) => { e.preventDefault(); onWishlistClick(); }} className="uppercase">
             <GlitchText>Wishlist [{wishlistCount}]</GlitchText>
           </a>
-          <a href="#" className="uppercase">
+          <a href="#" onClick={(e) => { e.preventDefault(); onCartClick(); }} className="uppercase"> 
             <GlitchText>Cart [{cartCount}]</GlitchText>
           </a>
         </nav>
