@@ -1,15 +1,6 @@
-
 import { Product } from './types';
 
 export const products: Product[] = [
-  {
-    id: 100, // Unique ID for the new product
-    name: "DOGGPOUND TEE",
-    description: ">_ ECHOES OF THE STREETS. GHOSTLY SILHOUETTE. HEAVYWEIGHT COTTON. BUILT FOR URBAN NIGHTS AND HIDDEN PATHS. MODEL IS 6'0\". LOCATION: FORGOTTEN ALLEYWAYS.",
-    price: "38.00 USD",
-    image: "https://picsum.photos/seed/doggpound_tee/600/800", // Placeholder for the new design
-    category: "Tops & T-shirts"
-  },
   {
     id: 1,
     name: "STATIC HOODIE",

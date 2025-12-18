@@ -1,61 +1,62 @@
+
 import React from 'react';
 import { Product } from '../types';
-import GlitchText from './GlitchText';
 
 interface WishlistModalProps {
   isOpen: boolean;
   onClose: () => void;
   wishlistItems: Product[];
   onRemoveFromWishlist: (product: Product) => void;
-  onAddToCart: (product: Product, quantity: number) => void; 
+  onAddToCart: (product: Product) => void;
 }
 
 const WishlistModal: React.FC<WishlistModalProps> = ({ isOpen, onClose, wishlistItems, onRemoveFromWishlist, onAddToCart }) => {
   if (!isOpen) return null;
 
-  const handleItemAddToCart = (item: Product) => {
-    onAddToCart(item, 1); // Pass quantity 1 when adding from wishlist
-  };
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center backdrop-blur-sm p-4" onClick={onClose}>
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-[110] flex items-center justify-center p-4" onClick={onClose}>
       <div 
-        className="w-full max-w-3xl border-2 border-[#6a00ff] bg-[#0a0a0a] p-4 relative animate-fade-in" 
-        style={{ boxShadow: '0 0 15px rgba(106, 0, 255, 0.5), 0 0 25px rgba(106, 0, 255, 0.3)' }}
-        onClick={(e) => e.stopPropagation()}
+        className="w-full max-w-2xl bg-[#0a0a0a] border border-[#C0C0C0]/20 flex flex-col animate-fade-in max-h-[80vh]"
+        onClick={e => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex justify-between items-center border-b border-[#6a00ff] pb-2 mb-4">
-          <h2 className="font-tech-mono text-2xl text-[#00ff41]"><GlitchText>>_ SAVED_ITEMS.DAT</GlitchText></h2>
-          <button onClick={onClose} className="text-2xl text-[#ff003c] hover:text-white font-tech-mono transition-colors duration-200">[X]</button>
+        <div className="p-6 border-b border-white/10 flex justify-between items-center">
+          <h2 className="font-bebas text-4xl text-white">THE ARCHIVE (WISHLIST)</h2>
+          <button onClick={onClose} className="text-[#C0C0C0] hover:text-[#D90429] font-tech-mono transition-colors">[CLOSE]</button>
         </div>
 
-        {/* Content */}
-        <div className="max-h-[60vh] overflow-y-auto pr-2">
+        <div className="flex-grow overflow-y-auto p-6 space-y-4 custom-scrollbar">
           {wishlistItems.length === 0 ? (
-            <p className="text-center py-8 text-gray-500">// NO DATA CACHED</p>
+            <div className="py-12 text-center text-[#C0C0C0] font-tech-mono opacity-50">
+              <p>// ARCHIVE IS EMPTY</p>
+            </div>
           ) : (
-            <ul className="space-y-2">
-              {wishlistItems.map(item => (
-                <li key={item.id} className="flex items-center justify-between p-2 border border-transparent hover:border-[rgba(0,255,65,0.2)] hover:bg-[rgba(0,255,65,0.05)] transition-all duration-200">
-                  <div className="flex items-center space-x-4">
-                    <img src={item.image} alt={item.name} className="w-16 h-20 object-cover border border-[rgba(255,255,255,0.2)]" />
-                    <div>
-                      <h3 className="font-tech-mono text-lg text-white">{item.name}</h3>
-                      <p className="text-sm text-gray-400">{item.price}</p>
-                    </div>
+            wishlistItems.map(item => (
+              <div key={item.id} className="flex gap-4 border-b border-white/5 pb-4">
+                <div className="w-20 aspect-[3/4] bg-black overflow-hidden">
+                  <img src={item.image} className="w-full h-full object-cover grayscale" alt={item.name} />
+                </div>
+                <div className="flex-grow flex flex-col justify-between py-1">
+                  <div>
+                    <h3 className="font-bebas text-2xl text-white">{item.name}</h3>
+                    <p className="text-[#9EFD38] font-bebas text-lg">{item.price}</p>
                   </div>
-                  <div className="flex flex-col md:flex-row items-end md:items-center space-y-2 md:space-y-0 md:space-x-2">
-                    <button onClick={() => onRemoveFromWishlist(item)} className="font-tech-mono text-xs uppercase px-2 py-1 border border-[#ff003c] text-[#ff003c] hover:bg-[#ff003c] hover:text-black transition-colors duration-200">
-                      [ REMOVE ]
+                  <div className="flex gap-2">
+                    <button 
+                      onClick={() => onAddToCart(item)}
+                      className="bg-[#9EFD38] text-black font-bebas px-4 py-1 text-sm hover:scale-105 transition-transform"
+                    >
+                      ADD TO SCENE
                     </button>
-                    <button onClick={() => handleItemAddToCart(item)} className="font-tech-mono text-xs uppercase px-2 py-1 border border-[#00ff41] text-[#00ff41] hover:bg-[#00ff41] hover:text-black transition-colors duration-200">
-                      [ ADD TO CART ]
+                    <button 
+                      onClick={() => onRemoveFromWishlist(item)}
+                      className="border border-[#D90429] text-[#D90429] font-bebas px-4 py-1 text-sm hover:bg-[#D90429] hover:text-white transition-colors"
+                    >
+                      REMOVE
                     </button>
                   </div>
-                </li>
-              ))}
-            </ul>
+                </div>
+              </div>
+            ))
           )}
         </div>
       </div>
