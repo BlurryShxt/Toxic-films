@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import GlitchText from './GlitchText';
 
 interface HeaderProps {
   cartCount: number;
@@ -39,7 +40,9 @@ const Header: React.FC<HeaderProps> = ({
           onClick={onLogoClick}
           className="font-bebas text-3xl md:text-4xl tracking-tighter cursor-pointer text-white hover:text-[#9EFD38] transition-colors"
         >
-          TOXIC<span className="text-[#C0C0C0]">FILMS</span>
+          <GlitchText text="TOXICFILMS">
+            TOXIC<span className="text-[#C0C0C0]">FILMS</span>
+          </GlitchText>
         </div>
 
         {/* Primary Nav */}
